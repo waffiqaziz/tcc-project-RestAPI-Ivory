@@ -62,18 +62,18 @@ User.update = function (id, user, result) {
   );
 };
 
-// // Show all Task
-// Task.findAll = function (result) {
-//   dbConn.query("SELECT * FROM task", function (err, res) {
-//     if (err) {
-//       console.log("error: ", err);
-//       result(null, err);
-//     } else {
-//       console.log("Task : ", res);
-//       result(null, res);
-//     }
-//   });
-// };
+// Find project
+Project.findproject = function (id, result) {
+  dbConn.query("SELECT * FROM projects WHERE id = ?", [id], function (err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+    } else {
+      console.log("Task : ", res);
+      result(null, res);
+    }
+  });
+};
 
 // // Find Task by Id
 // Task.findById = function (id, result) {

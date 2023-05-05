@@ -38,6 +38,19 @@ exports.register = function (req, res) {
   }
 };
 
+exports.update = function (req, res) {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res
+      .status(400)
+      .send({ error: true, message: "Please provide all required field" });
+  } else {
+    User.update(req.params.id, new User(req.body), function (err, user) {
+      if (err) res.send(err);
+      res.json({ error: false, message: "User profile successfully updated" });
+    });
+  }
+};
+
 // exports.findAll = function (req, res) {
 //   Task.findAll(function (err, task) {
 //     console.log("controller");
@@ -54,18 +67,6 @@ exports.register = function (req, res) {
 //   });
 // };
 
-// exports.update = function (req, res) {
-//   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-//     res
-//       .status(400)
-//       .send({ error: true, message: "Please provide all required field" });
-//   } else {
-//     Task.update(req.params.id, new Task(req.body), function (err, task) {
-//       if (err) res.send(err);
-//       res.json({ error: false, message: "Task successfully updated" });
-//     });
-//   }
-// };
 
 // exports.delete = function (req, res) {
 //   Task.delete(req.params.id, function (err, task) {
