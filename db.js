@@ -6,6 +6,7 @@ const dbConn = mysql.createConnection({
   user: "root",
   password: "",
   database: "ivory",
+  multipleStatements: true
 });
 
 dbConn.connect(function (err) {

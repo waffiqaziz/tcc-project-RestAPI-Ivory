@@ -23,6 +23,9 @@ class User {
         if (err) {
           console.log("error: ", err);
           result(err, null);
+        } else if (!res.length) {
+          console.log("no found", null);
+          result(err, res);
         } else {
           console.log(res);
           result(null, res);
@@ -38,7 +41,7 @@ class User {
       function (err, res) {
         if (err) {
           console.log("error: ", err);
-          result(err, null);
+          result(err, res);
         } else {
           console.log(res);
           result(null, res);
@@ -64,4 +67,3 @@ class User {
 }
 
 module.exports = User;
-

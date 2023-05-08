@@ -12,12 +12,19 @@ exports.login = function (req, res) {
       .send({ error: true, message: "Please provide all required field" });
   } else {
     User.login(new_user, function (err, user) {
-      if (err) res.send(err);
-      res.json({
-        error: false,
-        message: "Login successfully!",
-        data: user,
-      });
+      if (err || !user.length) {
+        res.json({
+          error: 1,
+          message: "Login Unsuccessfull! The email or password you entered incorrect",
+        });
+      }
+      else {
+        res.json({
+          error: 0,
+          message: "Login successfully!",
+          data: user,
+        });
+      }
     });
   }
 };
@@ -31,12 +38,18 @@ exports.register = function (req, res) {
       .send({ error: true, message: "Please provide all required field" });
   } else {
     User.register(new_user, function (err, user) {
-      if (err) res.send(err);
-      res.json({
-        error: false,
-        message: "Register successfully!",
-        data: user,
-      });
+      if (err) {
+        res.json({
+          error: 1,
+          message: "Register Unsuccessfull! Email has been added!!!",
+        });
+      }else {
+        res.json({
+          error: 0,
+          message: "Register successfully!",
+          data: user,
+        });
+      }
     });
   }
 };
