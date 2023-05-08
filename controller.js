@@ -62,7 +62,7 @@ exports.updateUser = function (req, res) {
   } else {
     User.update(req.params.user_id, new User(req.body), function (err, user) {
       if (err) res.send(err);
-      res.json({ error: false, message: "User profile successfully updated" });
+      res.json({ error: 0, message: "User profile successfully updated" });
     });
   }
 };
@@ -81,7 +81,7 @@ exports.addProject = function (req, res) {
       Project.add2workspace(req.params.user_id, project_id, function (err, project) {
         if (err) res.send(err);
         res.json({
-          error: false,
+          error: 0,
           message: "Add project successfully!",
           project,
         });
@@ -101,7 +101,7 @@ exports.addParent = function (req, res) {
     Parent.addparent(req.params.project_id, new_parent, function (err, project) {
       if (err) res.send(err);
       res.json({
-        error: false,
+        error: 0,
         message: "Add parent project successfully!",
         project,
       });
@@ -120,7 +120,7 @@ exports.addChild = function (req, res) {
     Child.add(req.params.parent_id, new_child_project, function (err, child) {
       if (err) res.send(err);
       res.json({
-        error: false,
+        error: 0,
         message: "Add child project successfully!",
         child,
       });
@@ -143,7 +143,7 @@ exports.deleteProject = function (req, res) {
   });
   Parent.deleteByProjectID(req.params.project_id, function (err, result) {
     if (err) res.send(err);
-    res.json({ error: false, message: "Project successfully deleted" });
+    res.json({ error: 0, message: "Project successfully deleted" });
   });
 };
 
@@ -153,7 +153,7 @@ exports.deleteParent = function (req, res) {
   });
   Child.deleteByParentID(req.params.parent_id, function (err, task) {
     if (err) res.send(err);
-    res.json({ error: false, message: "Parent Project successfully deleted" });
+    res.json({ error: 0, message: "Parent Project successfully deleted" });
   });
 };
 
@@ -161,7 +161,7 @@ exports.deleteChild = function (req, res) {
   Child.deleteByID(req.params.child_id, function (err, childProject) {
     if (err) res.send(err);
     res.json({ 
-      error: false, 
+      error: 0, 
       message: "Child Project successfully deleted" 
     });
   });
