@@ -64,6 +64,22 @@ class User {
       }
     );
   }
+  // add to workspace
+  static add2Workspace(user, result) {
+    dbConn.query(
+      `INSERT INTO users (name, email, password) VALUES(?,?,?)`,
+      [user.name, user.email, user.pass],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, res);
+        } else {
+          console.log(res);
+          result(null, res);
+        }
+      }
+    );
+  }
 }
 
 module.exports = User;

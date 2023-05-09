@@ -11,6 +11,12 @@ router.post("/register", controller.register);
 // Edit user profile based on user id (using x-www-form-urlencoded)
 router.put("/updateUser/:user_id", controller.updateUser);
 
+// Edit parent based on parent id (using x-www-form-urlencoded)
+router.put("/editParent/:parent_id", controller.editParent);
+
+// Edit child to done based on chiild id (using x-www-form-urlencoded)
+router.put("/doneChild/:child_id", controller.doneChild);
+
 // add project
 router.post("/addProject/:user_id", controller.addProject);
 

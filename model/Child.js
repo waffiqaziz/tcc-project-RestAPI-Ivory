@@ -53,6 +53,21 @@ class Child {
       }
     );
   }
+
+  static done(child_id, status, result) {
+    dbConn.query(
+      `UPDATE sprint_child SET status = ?  WHERE child_id=?;`,
+      [status, child_id],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+        } else {
+          result(null, res);
+        }
+      }
+    );
+  }
 }
 
 module.exports = Child;

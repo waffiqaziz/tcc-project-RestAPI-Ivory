@@ -67,6 +67,32 @@ exports.updateUser = function (req, res) {
   }
 };
 
+exports.editParent = function (req, res) {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res
+      .status(400)
+      .send({ error: true, message: "Please provide all required field" });
+  } else {
+    Parent.edit(req.params.parent_id, new Parent(req.body), function (err, user) {
+      if (err) res.send(err);
+      res.json({ error: 0, message: "Parent successfully updated" });
+    });
+  }
+};
+
+exports.doneChild = function (req, res) {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res
+      .status(400)
+      .send({ error: true, message: "Please provide all required field" });
+  } else {
+    Child.done(req.params.child_id, req.body, function (err, user) {
+      if (err) res.send(err);
+      res.json({ error: 0, message: "Sprint Child successfully updated" });
+    });
+  }
+};
+
 exports.addProject = function (req, res) {
   const new_project = new Project(req.body);
   //handles null error
@@ -98,7 +124,7 @@ exports.addParent = function (req, res) {
       .status(400)
       .send({ error: true, message: "Please provide all required field" });
   } else {
-    Parent.addparent(req.params.project_id, new_parent, function (err, project) {
+    Parent.add(req.params.project_id, new_parent, function (err, project) {
       if (err) res.send(err);
       res.json({
         error: 0,

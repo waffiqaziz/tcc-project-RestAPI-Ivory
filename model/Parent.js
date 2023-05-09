@@ -67,6 +67,21 @@ class Parent {
       }
     );
   }
+
+  static edit(parent_id, parent, result) {
+    dbConn.query(
+      `UPDATE sprint_parent SET parent_title =? WHERE parent_id = ?;`,
+      [parent.parent_title, parent_id],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+        } else {
+          result(null, res);
+        }
+      }
+    );
+  }
 }
 
 module.exports = Parent;
