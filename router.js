@@ -26,6 +26,9 @@ router.post("/addParent/:project_id", controller.addParent);
 // add child project
 router.post("/addChild/:parent_id", controller.addChild);
 
+// add workspace
+router.post("/addWorkspace", controller.addWorkspace);
+
 // Delete a project based on id
 router.delete("/deleteProject/:project_id", controller.deleteProject);
 
@@ -34,5 +37,35 @@ router.delete("/deleteParent/:parent_id", controller.deleteParent);
 
 // Delete a child project based on id
 router.delete("/deleteChild/:child_id", controller.deleteChild);
+
+// get user id by the email
+router.get("/getUserIDbyEmail/:email", controller.getUserIDbyEmail);
+
+// get title
+router.get("/showProjectTitle/:user_id", controller.showProjectTitle);
+
+// get project
+router.get("/getDataProject/:project_id", controller.getDataProject);
+
+// get member project
+router.get("/getMemberProject/:project_id", controller.getMemberProject);
+
+// get data user
+router.get("/getDataUser/:user_id", controller.getUserData);
+
+// get project user
+router.get("/getProjectByUserID/:user_id", controller.getProjectByUserID);
+
+// get data sprint parent
+router.get("/getParentByProjectID/:project_id", controller.getParentByProjectID);
+
+// get data sprint child
+router.get("/getChildByParentID/:parent_id", controller.getChildByParentID);
+
+// get data sprint child
+router.get("/checkInvitedMember", controller.checkInvitedMember);
+
+// get authentication for detail page
+router.get("/authDetail/:project_id", controller.authDetail);
 
 module.exports = router;

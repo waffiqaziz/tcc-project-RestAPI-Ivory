@@ -44,7 +44,7 @@ class Project {
   // add new project into workspace
   static add2workspace(user_id, project_id, result) {
     dbConn.query(
-      `INSERT INTO workspace (user_id, project_id, role) VALUES(?,?,0);`,
+      `INSERT INTO workspace (user_id, project_id, role_user) VALUES(?,?,0);`,
       [user_id, project_id],
       function (err, res) {
         if (err) {
@@ -77,6 +77,25 @@ class Project {
           console.log("error: ", err);
           result(null, err);
         } else {
+          result(null, res);
+        }
+      }
+    );
+  }
+
+  static getData(project_id, result){
+    dbConn.query(
+      "SELECT * FROM projects WHERE project_id = ?;",
+      [project_id],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else if (!res.length) {
+          console.log("Not Found", null);
+          result(err, res);
+        } else {
+          console.log(res);
           result(null, res);
         }
       }

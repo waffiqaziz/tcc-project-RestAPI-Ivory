@@ -68,6 +68,25 @@ class Child {
       }
     );
   }
+
+  static getChildByParentID(parent_id, result){
+    dbConn.query(
+      `SELECT * FROM sprint_child WHERE parent_id =  ?;`,
+      [parent_id],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else if (!res.length) {
+          console.log("Not Found", null);
+          result(err, res);
+        } else {
+          console.log(res);
+          result(null, res);
+        }
+      }
+    );
+  }
 }
 
 module.exports = Child;

@@ -68,6 +68,25 @@ class Parent {
     );
   }
 
+  static getParentByProjectID(project_id, result){
+    dbConn.query(
+      `SELECT * FROM sprint_parent WHERE project_id =  ?;`,
+      [project_id],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else if (!res.length) {
+          console.log("Not Found", null);
+          result(err, res);
+        } else {
+          console.log(res);
+          result(null, res);
+        }
+      }
+    );
+  }
+
   static edit(parent_id, parent, result) {
     dbConn.query(
       `UPDATE sprint_parent SET parent_title =? WHERE parent_id = ?;`,

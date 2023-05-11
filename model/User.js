@@ -24,7 +24,7 @@ class User {
           console.log("error: ", err);
           result(err, null);
         } else if (!res.length) {
-          console.log("no found", null);
+          console.log("Not Found", null);
           result(err, res);
         } else {
           console.log(res);
@@ -64,6 +64,7 @@ class User {
       }
     );
   }
+  
   // add to workspace
   static add2Workspace(user, result) {
     dbConn.query(
@@ -72,6 +73,44 @@ class User {
       function (err, res) {
         if (err) {
           console.log("error: ", err);
+          result(err, res);
+        } else {
+          console.log(res);
+          result(null, res);
+        }
+      }
+    );
+  }
+
+  static getData(user_id, result) {
+    dbConn.query(
+      "SELECT * FROM users WHERE user_id = ?;",
+      [user_id],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else if (!res.length) {
+          console.log("Not Found", null);
+          result(err, res);
+        } else {
+          console.log(res);
+          result(null, res);
+        }
+      }
+    );
+  }
+
+  static getUserIDbyEmail(email, result){
+    dbConn.query(
+      `SELECT user_id FROM users WHERE email = ?;`,
+      [email],
+      function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else if (!res.length) {
+          console.log("Not Found", null);
           result(err, res);
         } else {
           console.log(res);
